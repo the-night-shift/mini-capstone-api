@@ -6,13 +6,18 @@ class ProductsController < ApplicationController
 
   def create
     product = Product.new(
-                          name: params[:name],
-                          description: params[:description],
-                          price: params[:price],
-                          image_url: params[:image_url]
-                          )
-    product.save
-    render json: product.as_json
+      name: params[:name],
+      description: params[:description],
+      price: params[:price],
+      image_url: params[:image_url],
+      in_stock: params[:in_stock]
+    )
+    if product.save
+      render json: product.as_json
+    else
+      # do some other thing
+      render json: {errors: product.errors.full_messages}, status: :unprocessible_entity
+    end
   end
 
   def show
@@ -22,14 +27,18 @@ class ProductsController < ApplicationController
 
   def update
     product = Product.find(params[:id])
-    
+
     product.name = params[:name] || product.name
     product.description = params[:description] || product.description
+    product.in_stock = params[:in_stock] || product.in_stock
     product.price = params[:price] || product.price
     product.image_url = params[:image_url] || product.image_url
-    product.save
+    if product.save
+      render json: product.as_json
+    else
+      render json: {errors: product.errors.full_messages}
+    end
 
-    render json: product.as_json
   end
 
   def destroy

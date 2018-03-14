@@ -32,8 +32,8 @@ elsif input_option == "3"
   print "Description: "
   client_params[:description] = gets.chomp
 
-  print "Price: "
-  client_params[:price] = gets.chomp
+  print "In stock: "
+  client_params[:in_stock] = gets.chomp
 
   print "Image Url: "
   client_params[:image_url] = gets.chomp
@@ -62,6 +62,9 @@ elsif input_option == "4"
 
   print "Price (#{product["price"]}): "
   client_params[:price] = gets.chomp
+
+  print "In stock (#{product["in_stock"]}): "
+  client_params[:in_stock] = gets.chomp
 
   print "Image Url (#{product["image_url"]}): "
   client_params[:image_url] = gets.chomp
