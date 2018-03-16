@@ -40,13 +40,23 @@
 #   ])
 
 
-
+# assign supplier ids to products
 # grab all the products
-products = Product.all
-suppliers = Supplier.all
-# loop through them
-products.each do |product|
-  # assign an appropriate id to each of them
-  product.supplier_id = suppliers.sample.id
-  product.save
-end
+# products = Product.all
+# suppliers = Supplier.all
+# # loop through them
+# products.each do |product|
+#   # assign an appropriate id to each of them
+#   product.supplier_id = suppliers.sample.id
+#   product.save
+# end
+
+
+# make new Images based on image column from products
+# products = Product.all
+# # loop through them
+# products.each do |product|
+#   # make a new image for each product
+#   image = Image.new(url: product.image_url, product_id: product.id, description: Faker::Lorem.sentence)
+#   image.save
+# end
