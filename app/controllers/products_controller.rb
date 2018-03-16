@@ -1,6 +1,14 @@
 class ProductsController < ApplicationController
   def index
-    products = Product.all
+    search_term = params[:search]
+    # situation 1 --- sort by id
+    # situation 2 --- sort by price
+    sort_by_price = params[:sort_price]
+    if sort_by_price == 'true'
+      products = Product.order(:price).where("name LIKE ?", "%#{search_term}%")
+    else
+      products = Product.order(:id).where("name LIKE ?", "%#{search_term}%")
+    end
     render json: products.as_json
   end
 
@@ -38,7 +46,6 @@ class ProductsController < ApplicationController
     else
       render json: {errors: product.errors.full_messages}
     end
-
   end
 
   def destroy
