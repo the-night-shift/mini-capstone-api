@@ -12,7 +12,6 @@ class Product < ApplicationRecord
     {
       id: id,
       name: name,
-      image_url: image_url,
       price: price,
       description: description,
       is_discounted: is_discounted?,

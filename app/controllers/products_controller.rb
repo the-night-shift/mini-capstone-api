@@ -1,5 +1,9 @@
 class ProductsController < ApplicationController
   def index
+    # prove that the app knows I'm logged in
+    p "*" * 50
+    p current_user
+    p "*" * 50
     search_term = params[:search]
     # situation 1 --- sort by id
     # situation 2 --- sort by price
