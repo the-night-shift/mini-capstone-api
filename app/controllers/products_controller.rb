@@ -33,7 +33,7 @@ class ProductsController < ApplicationController
   end
 
   def show
-    product = Product.find(params[:id])
+    product = Product.find_by(id: params[:id])
     render json: product.as_json
   end
 
