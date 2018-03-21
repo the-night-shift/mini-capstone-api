@@ -5,7 +5,7 @@ require 'unirest'
 response = Unirest.post("localhost:3000/user_token", parameters:
   {
     auth: {
-      email: "alex@alex.com",
+      email: "bob@bob.com",
       password: "password"
     }
   }
@@ -17,16 +17,22 @@ jwt = response.body["jwt"]
 
 Unirest.default_header("Authorization", "Bearer #{jwt}")
 
-# p response.body
-
-# make a new order
-response = Unirest.post("localhost:3000/orders", parameters: {
-    product_id: 4,
-    quantity: 3
-  }
-)
+# show all the orders
+response = Unirest.get("localhost:3000/orders")
 
 p response.body
+
+
+
+
+# make a new order
+# response = Unirest.post("localhost:3000/orders", parameters: {
+#     product_id: 3,
+#     quantity: 10
+#   }
+# )
+
+# p response.body
 
 # give knock a password and email, knock gives me back a json web token
 

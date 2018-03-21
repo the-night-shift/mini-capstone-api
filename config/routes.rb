@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get '/orders' => 'orders#index'
   post '/orders' => 'orders#create'
   post 'user_token' => 'user_token#create'
   get '/products' => 'products#index'

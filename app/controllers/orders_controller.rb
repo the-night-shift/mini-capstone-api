@@ -1,4 +1,9 @@
 class OrdersController < ApplicationController
+  def index
+    orders = current_user.orders
+    render json: orders.as_json
+  end
+
   def create
     # do some calculations
     product = Product.find_by(id: params[:product_id])
