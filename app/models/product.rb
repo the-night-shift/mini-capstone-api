@@ -1,4 +1,6 @@
 class Product < ApplicationRecord
+  has_many :category_products
+  has_many :categories, through: :category_products
   has_many :orders
   belongs_to :supplier
   has_many :images
@@ -35,6 +37,19 @@ class Product < ApplicationRecord
   def total
     price + tax
   end
+
+  # def categories
+  #   # get the id of the product
+  #   # id
+  #   # look that up in the join table
+  #   category_products = CategoryProduct.where(product_id: id)
+  #   categories_of_this_product = []
+  #   category_products.each do |category_product|
+  #     # look up all the categories for the items in the join table
+  #     categories_of_this_product << category_product.category
+  #   end
+  #   return categories_of_this_product
+  # end
 end
 
 
