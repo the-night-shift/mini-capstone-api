@@ -1,4 +1,6 @@
 class ProductsController < ApplicationController
+  before_action :authenticate_admin, except: [:index, :show]
+
   def index
     # prove that the app knows I'm logged in
     p "*" * 50
@@ -20,26 +22,22 @@ class ProductsController < ApplicationController
     # ONLY ADMINS
     # p '*' * 50
     # p current_user
-    if current_user && current_user.admin
-      product = Product.new(
-        name: params[:name],
-        description: params[:description],
-        price: params[:price],
-        in_stock: params[:in_stock]
-      )
-      if product.save
-        render json: product.as_json
-      else
-        # do some other thing
-        render json: {errors: product.errors.full_messages}, status: :unprocessible_entity
-      end
+    product = Product.new(
+      name: params[:name],
+      description: params[:description],
+      price: params[:price],
+      in_stock: params[:in_stock]
+    )
+    if product.save
+      render json: product.as_json
     else
-      # what if they aren't an admin?
-      render json: {message: "You can't do that"}, status: :unauthorized
+      # do some other thing
+      render json: {errors: product.errors.full_messages}, status: :unprocessible_entity
     end
   end
 
   def show
+
     product = Product.find_by(id: params[:id])
     render json: product.as_json
   end

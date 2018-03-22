@@ -2,20 +2,20 @@ require 'unirest'
 
 
 # login
-# response = Unirest.post("localhost:3000/user_token", parameters:
-#   {
-#     auth: {
-#       email: "alex@alex.com",
-#       password: "password"
-#     }
-#   }
-# )
+response = Unirest.post("localhost:3000/user_token", parameters:
+  {
+    auth: {
+      email: "alex@alex.com",
+      password: "password"
+    }
+  }
+)
 
-# # p response.body
+# p response.body
 
-# jwt = response.body["jwt"]
+jwt = response.body["jwt"]
 
-# Unirest.default_header("Authorization", "Bearer #{jwt}")
+Unirest.default_header("Authorization", "Bearer #{jwt}")
 
 # # show all the orders
 # # response = Unirest.get("localhost:3000/orders")
@@ -50,9 +50,9 @@ require 'unirest'
 # input_option = gets.chomp
 
 # if input_option == "1"
-#   response = Unirest.get("http://localhost:3000/products")
-#   products = response.body
-#   puts JSON.pretty_generate(products)
+  response = Unirest.get("http://localhost:3000/products")
+  products = response.body
+  puts JSON.pretty_generate(products)
 # elsif input_option == "2"
 #   print "Enter product id: "
 #   input_id = gets.chomp
@@ -75,16 +75,17 @@ require 'unirest'
   # print "Image Url: "
   # client_params[:image_url] = gets.chomp
 
-  response = Unirest.post(
-    "http://localhost:3000/products",
-    parameters: {
-      name: "rug",
-      price: 13
-    }
-  )
-  product_data = response.body
+  # response = Unirest.post(
+  #   "http://localhost:3000/products",
+  #   parameters: {
+  #     name: "rug",
+  #     price: 13
+  #   }
+  # )
+  # # product_data = response.body
+  # p response.body
 
-  puts product_data
+  # puts product_data
 # elsif input_option == "4"
 #   print "Enter product id: "
 #   input_id = gets.chomp
@@ -119,10 +120,11 @@ require 'unirest'
 
 #   puts JSON.pretty_generate(product_data)
 # elsif input_option == "5"
-#   print "Enter product id: "
-#   input_id = gets.chomp
+  # print "Enter product id: "
+  # input_id = gets.chomp
 
-#   response = Unirest.delete("http://localhost:3000/products/#{input_id}")
+  # response = Unirest.delete("http://localhost:3000/products/#{input_id}")
+  # p response
 #   data = response.body
 #   puts data["message"]
 # elsif input_option == '6'
