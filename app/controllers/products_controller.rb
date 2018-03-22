@@ -17,18 +17,25 @@ class ProductsController < ApplicationController
   end
 
   def create
-    product = Product.new(
-      name: params[:name],
-      description: params[:description],
-      price: params[:price],
-      image_url: params[:image_url],
-      in_stock: params[:in_stock]
-    )
-    if product.save
-      render json: product.as_json
+    # ONLY ADMINS
+    # p '*' * 50
+    # p current_user
+    if current_user && current_user.admin
+      product = Product.new(
+        name: params[:name],
+        description: params[:description],
+        price: params[:price],
+        in_stock: params[:in_stock]
+      )
+      if product.save
+        render json: product.as_json
+      else
+        # do some other thing
+        render json: {errors: product.errors.full_messages}, status: :unprocessible_entity
+      end
     else
-      # do some other thing
-      render json: {errors: product.errors.full_messages}, status: :unprocessible_entity
+      # what if they aren't an admin?
+      render json: {message: "You can't do that"}, status: :unauthorized
     end
   end
 

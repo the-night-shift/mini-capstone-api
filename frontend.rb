@@ -2,25 +2,25 @@ require 'unirest'
 
 
 # login
-response = Unirest.post("localhost:3000/user_token", parameters:
-  {
-    auth: {
-      email: "bob@bob.com",
-      password: "password"
-    }
-  }
-)
+# response = Unirest.post("localhost:3000/user_token", parameters:
+#   {
+#     auth: {
+#       email: "alex@alex.com",
+#       password: "password"
+#     }
+#   }
+# )
+
+# # p response.body
+
+# jwt = response.body["jwt"]
+
+# Unirest.default_header("Authorization", "Bearer #{jwt}")
+
+# # show all the orders
+# # response = Unirest.get("localhost:3000/orders")
 
 # p response.body
-
-jwt = response.body["jwt"]
-
-Unirest.default_header("Authorization", "Bearer #{jwt}")
-
-# show all the orders
-response = Unirest.get("localhost:3000/orders")
-
-p response.body
 
 
 
@@ -61,27 +61,30 @@ p response.body
 #   product = response.body
 #   puts JSON.pretty_generate(product)
 # elsif input_option == "3"
-#   client_params = {}
+  # client_params = {}
 
-#   print "Name: "
-#   client_params[:name] = gets.chomp
+  # print "Name: "
+  # client_params[:name] = gets.chomp
 
-#   print "Description: "
-#   client_params[:description] = gets.chomp
+  # print "Description: "
+  # client_params[:description] = gets.chomp
 
-#   print "In stock: "
-#   client_params[:in_stock] = gets.chomp
+  # print "In stock: "
+  # client_params[:in_stock] = gets.chomp
 
-#   print "Image Url: "
-#   client_params[:image_url] = gets.chomp
+  # print "Image Url: "
+  # client_params[:image_url] = gets.chomp
 
-#   response = Unirest.post(
-#                           "http://localhost:3000/products",
-#                           parameters: client_params
-#                           )
-#   product_data = response.body
+  response = Unirest.post(
+    "http://localhost:3000/products",
+    parameters: {
+      name: "rug",
+      price: 13
+    }
+  )
+  product_data = response.body
 
-#   puts JSON.pretty_generate(product_data)
+  puts product_data
 # elsif input_option == "4"
 #   print "Enter product id: "
 #   input_id = gets.chomp
