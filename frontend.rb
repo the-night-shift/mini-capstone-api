@@ -14,8 +14,16 @@ response = Unirest.post("localhost:3000/user_token", parameters:
 # p response.body
 
 jwt = response.body["jwt"]
+p jwt
 
 Unirest.default_header("Authorization", "Bearer #{jwt}")
+
+response = Unirest.post("localhost:3000/carted_products", parameters: {
+    product_id: 1,
+    quantity: 3
+  }
+)
+
 
 # # show all the orders
 # # response = Unirest.get("localhost:3000/orders")
@@ -24,7 +32,7 @@ Unirest.default_header("Authorization", "Bearer #{jwt}")
 
 
 
-
+# HEREEEEEEEE
 # make a new order
 # response = Unirest.post("localhost:3000/orders", parameters: {
 #     product_id: 3,
@@ -50,9 +58,9 @@ Unirest.default_header("Authorization", "Bearer #{jwt}")
 # input_option = gets.chomp
 
 # if input_option == "1"
-  response = Unirest.get("http://localhost:3000/products")
-  products = response.body
-  puts JSON.pretty_generate(products)
+  # response = Unirest.get("http://localhost:3000/products")
+  # products = response.body
+  # puts JSON.pretty_generate(products)
 # elsif input_option == "2"
 #   print "Enter product id: "
 #   input_id = gets.chomp
