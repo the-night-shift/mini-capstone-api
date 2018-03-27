@@ -18,10 +18,15 @@ p jwt
 
 Unirest.default_header("Authorization", "Bearer #{jwt}")
 
-# carted products index
-response = Unirest.get("localhost:3000/carted_products")
-
+# orders create
+response = Unirest.post("localhost:3000/orders")
 p response.body
+
+# carted products index
+# response = Unirest.get("localhost:3000/carted_products")
+
+# p response.body
+
 
 
 # carted products create
