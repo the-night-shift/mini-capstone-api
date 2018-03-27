@@ -35,16 +35,19 @@ class OrdersController < ApplicationController
       calculated_subtotal += carted_product.quantity * carted_product.product.price
     end
 
-    p calculated_subtotal
-    render json: {subtotal: calculated_subtotal}
+    calculated_tax = calculated_subtotal * 0.09
+    calculated_total = calculated_subtotal + calculated_tax
     # outputs
     # the subtotal --- all the items and their prices and their quantities all added up together
-    # order = Order.new(
-    #   user_id: current_user.id,
-    #   subtotal: ,
-    #   tax: ,
-    #   total: ,
-    # )
+    order = Order.new(
+      user_id: current_user.id,
+      subtotal: calculated_subtotal,
+      tax: calculated_tax,
+      total: calculated_total,
+    )
+    order.save!
+    carted_products.update_all(status: "purchased", order_id: order.id)
+    render json: order
   end
 
 end

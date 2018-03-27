@@ -19,15 +19,19 @@ p jwt
 Unirest.default_header("Authorization", "Bearer #{jwt}")
 
 # orders create
-response = Unirest.post("localhost:3000/orders")
-p response.body
-
-# carted products index
-# response = Unirest.get("localhost:3000/carted_products")
-
+# response = Unirest.post("localhost:3000/orders")
 # p response.body
 
+# carted products index
+response = Unirest.get("localhost:3000/carted_products")
 
+p response.body
+
+# pick an item to remove
+
+response = Unirest.delete("localhost:3000/carted_products", parameters: {
+  id: gets.chomp
+  })
 
 # carted products create
 # response = Unirest.post("localhost:3000/carted_products", parameters: {

@@ -18,4 +18,12 @@ class CartedProductsController < ApplicationController
       render json: {errors: carted_product.errors.full_messages}
     end
   end
+
+  def destroy
+    # find the correct carted_product
+    carted_product = CartedProduct.find_by(id: params[:id])
+    # change the status to "removed"
+    carted_product.update(status: "removed")
+    render json: {message: "You removed this product from your shopping cart"}
+  end
 end
