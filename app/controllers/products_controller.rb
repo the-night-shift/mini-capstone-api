@@ -1,20 +1,21 @@
 class ProductsController < ApplicationController
-  before_action :authenticate_admin, except: [:index, :show]
+  # before_action :authenticate_admin, except: [:index, :show]
 
   def index
-    # prove that the app knows I'm logged in
-    p "*" * 50
-    p current_user
-    p "*" * 50
-    search_term = params[:search]
-    # situation 1 --- sort by id
-    # situation 2 --- sort by price
-    sort_by_price = params[:sort_price]
-    if sort_by_price == 'true'
-      products = Product.order(:price).where("name LIKE ?", "%#{search_term}%")
-    else
-      products = Product.order(:id).where("name LIKE ?", "%#{search_term}%")
-    end
+    # # prove that the app knows I'm logged in
+    # p "*" * 50
+    # p current_user
+    # p "*" * 50
+    # search_term = params[:search]
+    # # situation 1 --- sort by id
+    # # situation 2 --- sort by price
+    # sort_by_price = params[:sort_price]
+    # if sort_by_price == 'true'
+    #   products = Product.order(:price).where("name LIKE ?", "%#{search_term}%")
+    # else
+    #   products = Product.order(:id).where("name LIKE ?", "%#{search_term}%")
+    # end
+    products = Product.all
     render json: products.as_json
   end
 
@@ -37,7 +38,6 @@ class ProductsController < ApplicationController
   end
 
   def show
-
     product = Product.find_by(id: params[:id])
     render json: product.as_json
   end
@@ -49,8 +49,7 @@ class ProductsController < ApplicationController
     product.description = params[:description] || product.description
     product.in_stock = params[:in_stock] || product.in_stock
     product.price = params[:price] || product.price
-    product.image_url = params[:image_url] || product.image_url
-    if product.save
+    if product.save!
       render json: product.as_json
     else
       render json: {errors: product.errors.full_messages}

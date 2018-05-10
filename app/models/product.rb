@@ -50,6 +50,14 @@ class Product < ApplicationRecord
   #   end
   #   return categories_of_this_product
   # end
+  # Debt.display_apr
+
+  # Product.expensive_products
+  def self.expensive_products
+    Product.where("price > 20")
+    # return all the expensive products
+  end
+
 end
 
 

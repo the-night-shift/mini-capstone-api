@@ -1,0 +1,77 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My App</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.js"></script>
+  <script src="index.js" defer></script>
+</head>
+<body>
+  <div id="vue-app">
+
+    <router-view></router-view>
+
+  </div>
+</body>
+</html>
+
+<template id="home-page">
+  <div class="vue-component">
+<!-- index page for products -->
+
+    <h2>Here are the products</h2>
+    <div v-for="product in products">
+      <p> {{product.id }} </p>
+      <p> {{product.name }} </p>
+      <p> {{product.price }} </p>
+      <p> {{product.description }} </p>
+      <p> {{product.created_at }} </p>
+      <hr>
+    </div>
+
+  </div>
+</template>
+
+
+<template id="product-show-page">
+  <div class="vue-component">
+<!-- index page for products -->
+
+    <h2>Here is the product</h2>
+
+    <p>{{ product.name }}</p>
+    <p>{{ product.description }}</p>
+
+  </div>
+</template>
+
+
+
+<template id="product-edit-page">
+  <div class="vue-component">
+<!-- index page for products -->
+  Here is the edit page, this will have a form
+    <h2>Here is the product</h2>
+
+    <p><input type="text" v-model="product.name"></p>
+    <p><input type="text" v-model="product.description"></p>
+    <p><input type="text" v-model="product.price"></p>
+    <button v-on:click="updateProduct()">Update the product</button>
+
+  </div>
+</template>
+
+
+
+<template id="product-new-page">
+  <div class="vue-component">
+<!-- index page for products -->
+  Here is the new page, this will have a form
+    <h2>Here is the product</h2>
+
+  </div>
+</template>
